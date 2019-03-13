@@ -4,13 +4,20 @@ import java.math.BigDecimal;
 
 class Discount {
 
-    public Discount(String discountCause, BigDecimal value) {
-        this.discountCause = discountCause;
+    private String cause;
+
+    private Money value;
+
+    Discount(String discountCause, BigDecimal value) {
+        this.cause = discountCause;
         this.value = new Money(value);
     }
 
-    String discountCause;
+    public String getCause() {
+        return cause;
+    }
 
-    Money value;
-
+    public Money getValue() {
+        return value;
+    }
 }

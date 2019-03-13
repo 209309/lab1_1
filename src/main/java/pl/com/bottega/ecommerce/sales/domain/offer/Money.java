@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 class Money {
 
+    private String currency;
+
+    private BigDecimal value;
+
     public Money(String currency, BigDecimal value) {
         this.currency = currency;
         this.value = value;
@@ -14,8 +18,11 @@ class Money {
         this.currency = "euro";
     }
 
-    String currency;
+    public String getCurrency() {
+        return currency;
+    }
 
-    BigDecimal value;
-
+    public BigDecimal getValue() {
+        return value;
+    }
 }

@@ -19,15 +19,7 @@ import java.util.Objects;
 public class OfferItem {
 
     // product
-    private String productId;
-
-    private BigDecimal productPrice;
-
-    private String productName;
-
-    private Date productSnapshotDate;
-
-    private String productType;
+    private Product product;
 
     private int quantity;
 
@@ -45,11 +37,7 @@ public class OfferItem {
 
     public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate, String productType,
             int quantity, BigDecimal discount, String discountCause) {
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.productName = productName;
-        this.productSnapshotDate = productSnapshotDate;
-        this.productType = productType;
+        this.product = new Product(productId, productPrice, productName, productSnapshotDate, productType);
 
         this.quantity = quantity;
         this.discount = discount;
@@ -65,23 +53,23 @@ public class OfferItem {
     }
 
     public String getProductId() {
-        return productId;
+        return product.id;
     }
 
     public BigDecimal getProductPrice() {
-        return productPrice;
+        return product.price.value;
     }
 
     public String getProductName() {
-        return productName;
+        return product.name;
     }
 
     public Date getProductSnapshotDate() {
-        return productSnapshotDate;
+        return product.snapshotDate;
     }
 
     public String getProductType() {
-        return productType;
+        return product.type;
     }
 
     public BigDecimal getTotalCost() {
@@ -106,7 +94,7 @@ public class OfferItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalCost.currency, discount, discountCause, productId, productName, productPrice, productSnapshotDate, productType,
+        return Objects.hash(totalCost.currency, discount, discountCause, product.id, product.name, product.price, product.snapshotDate, product.type,
                 quantity, totalCost);
     }
 
@@ -125,11 +113,11 @@ public class OfferItem {
         return Objects.equals(totalCost.currency, other.totalCost.currency)
                && Objects.equals(discount, other.discount)
                && Objects.equals(discountCause, other.discountCause)
-               && Objects.equals(productId, other.productId)
-               && Objects.equals(productName, other.productName)
-               && Objects.equals(productPrice, other.productPrice)
-               && Objects.equals(productSnapshotDate, other.productSnapshotDate)
-               && Objects.equals(productType, other.productType)
+               && Objects.equals(product.id, other.product.id)
+               && Objects.equals(product.name, other.product.name)
+               && Objects.equals(product.price, other.product.price)
+               && Objects.equals(product.snapshotDate, other.product.snapshotDate)
+               && Objects.equals(product.type, other.product.type)
                && quantity == other.quantity
                && Objects.equals(totalCost, other.totalCost);
     }
@@ -142,29 +130,29 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (productPrice == null) {
-            if (other.productPrice != null) {
+        if (product.price == null) {
+            if (other.product.price != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!product.price.equals(other.product.price)) {
             return false;
         }
-        if (productName == null) {
-            if (other.productName != null) {
+        if (product.name == null) {
+            if (other.product.name != null) {
                 return false;
             }
-        } else if (!productName.equals(other.productName)) {
+        } else if (!product.name.equals(other.product.name)) {
             return false;
         }
 
-        if (productId == null) {
-            if (other.productId != null) {
+        if (product.id == null) {
+            if (other.product.id != null) {
                 return false;
             }
-        } else if (!productId.equals(other.productId)) {
+        } else if (!product.id.equals(other.product.id)) {
             return false;
         }
-        if (productType != other.productType) {
+        if (product.type != other.product.type) {
             return false;
         }
 
